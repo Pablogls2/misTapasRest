@@ -21,7 +21,7 @@ public class Controlador {
 
     @RequestMapping(value="usuarios",method= RequestMethod.GET)
     public ResponseEntity<Usuario> getUsuario(){
-       Usuario u= new Usuario (1,"pablo@hola.com","sdfsfAEF");
+       Usuario u= new Usuario ();
 
        return ResponseEntity.ok(u);
     }
