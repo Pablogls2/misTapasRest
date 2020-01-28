@@ -22,7 +22,7 @@ public class Usuario {
     @Column(name = "psw", nullable = false, length = 50)
     private String psw;
 
-
+    //no se puede hacer auto incrementable asique habra que hacerlo por codigo
     @Column(name = "id_bar",nullable =false,length = 10)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_bar;
