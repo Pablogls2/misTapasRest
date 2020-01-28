@@ -35,19 +35,19 @@ public class Controlador {
      */
     @RequestMapping(value = "usuarios", method = RequestMethod.GET)
     public ResponseEntity<List<Usuario>> findAll() {
-        //Producto p = new Producto(1L,"Producto");
-        //ArrayList<Producto> l = new ArrayList<Producto>();
-        // l.add(p);
+
         // Nos conectamos y realizamos el select
         List<Usuario> l = ud.findAll();
         // Devolvemos la ista de productos
         return ResponseEntity.ok(l);
     }
 
-    @RequestMapping(value = "usuario/{nickname}" , "usuario/{psw}", method = RequestMethod.GET)
-    public ResponseEntity<Producto> findById(@PathVariable("id") Long id) {
+
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public ResponseEntity<Usuario> findByNicknamePsw(@PathVariable("nickname") String nickname, @PathVariable("psw") String psw) {
         // Buscamos el producto por id
-        Optional<Producto> op = pd.findById(id);
+
+        Optional<Usuario> op = ud.findbyNickPsw(nickname,psw);
         // Devolvemos el producto si existe.
         if (op.isPresent()) {
             return ResponseEntity.ok(op.get());
