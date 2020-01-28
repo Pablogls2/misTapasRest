@@ -2,18 +2,26 @@ package com.example.mistapasrest.modelos;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table (name="usuarios")
 public class Usuario {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column(name = "nickname", nullable = false, length = 50)
     private String nickname;
+    @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
+    @Column(name = "email", nullable = false, length = 50)
     private String email;
+    @Column(name = "psw", nullable = false, length = 50)
     private String psw;
+    @Column(name = "id_bar", nullable = false, length = 50)
     private int id_bar;
 
     public Usuario() {
