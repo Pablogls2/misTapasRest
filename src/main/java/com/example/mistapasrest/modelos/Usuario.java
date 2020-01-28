@@ -13,7 +13,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "nickname", nullable = false, length = 50)
+    @Column(name = "nickname", nullable = false, length = 50, unique = true)
     private String nickname;
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
@@ -21,7 +21,10 @@ public class Usuario {
     private String email;
     @Column(name = "psw", nullable = false, length = 50)
     private String psw;
-    @Column(name = "id_bar", nullable = false, length = 50)
+
+
+    @Column(name = "id_bar",nullable =false,length = 10)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_bar;
 
     public Usuario() {
@@ -86,6 +89,8 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{}";
+        return String.format(
+                "Usuario[id=%d,nickname='%s', nombre='%s',email='%s',psw='%s'," +
+                        "id_bar=%d ]",id,nickname,nombre,email,psw,id_bar);
     }
 }
