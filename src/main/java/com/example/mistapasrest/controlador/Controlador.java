@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/app/")
 public class Controlador {
 
     @Autowired
@@ -43,11 +43,25 @@ public class Controlador {
     }
 
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
-    public ResponseEntity<Usuario> findByNicknamePsw(@PathVariable("nickname") String nickname, @PathVariable("psw") String psw) {
+    @RequestMapping(value = "login/{nick}/{psw}", method = RequestMethod.GET)
+    public ResponseEntity<Usuario> findByNicknamePsw(@PathVariable("nick") String nick, @PathVariable("psw") String psw) {
         // Buscamos el producto por id
 
-        Optional<Usuario> op = ud.findbyNickPsw(nickname,psw);
+        Optional<Usuario> op = ud.findLogin(nick,psw);
+        // Devolvemos el producto si existe.
+        if (op.isPresent()) {
+            return ResponseEntity.ok(op.get());
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+
+    }
+
+    @RequestMapping(value = "login/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Usuario> findbyId(@PathVariable("id") Integer id) {
+        // Buscamos el producto por id
+
+        Optional<Usuario> op = ud.findById(id);
         // Devolvemos el producto si existe.
         if (op.isPresent()) {
             return ResponseEntity.ok(op.get());

@@ -10,10 +10,12 @@ import java.util.UUID;
 
 public interface UsuariosDao extends JpaRepository<Usuario, Integer> {
 
-    @Query("SELECT t FROM Usuario t where t.nickname = :nickname AND t.psw = :nickname")
+   /* @Query("SELECT t FROM Usuario t where t.nickname = :nickname AND t.psw = :nickname")
     public Optional<Usuario> findbyNickPsw(@Param("nickname") String nick,
-                                                    @Param("psw") String psw);
+                                                    @Param("psw") String psw);*/
 
 
+    @Query("SELECT u.nickname,u.psw,u.email FROM Usuario u where u.nickname = :nick and u.psw=:psw")
+    Optional<Usuario> findLogin(@Param("nick") String nick, @Param("psw") String psw);
 
 }
