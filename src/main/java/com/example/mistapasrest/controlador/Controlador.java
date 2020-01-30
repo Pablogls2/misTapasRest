@@ -17,7 +17,8 @@ public class Controlador {
 
     @Autowired
     private UsuariosDao ud;
-   // private BaresDao bd;
+    /*@Autowired
+    private BaresDao bd;*/
 
     @GetMapping
     @RequestMapping(value = "hola", method = RequestMethod.GET)
@@ -54,10 +55,10 @@ public class Controlador {
      * @return
      */
     @RequestMapping(value = "login/{nick}/{psw}", method = RequestMethod.GET)
-    public ResponseEntity<Usuario> findByNicknamePsw(@PathVariable("nick") String nick, @PathVariable("psw") String psw) {
+    public ResponseEntity<Usuario> findByNicknameAndPsw(@PathVariable("nick") String nick, @PathVariable("psw") String psw) {
         // Buscamos el producto por id
 
-        Optional<Usuario> op = ud.findLogin(nick, psw);
+        Optional<Usuario> op = ud.findByNicknameAndPsw(nick, psw);
         // Devolvemos el producto si existe.
         if (op.isPresent()) {
             return ResponseEntity.ok(op.get());
@@ -97,7 +98,7 @@ public class Controlador {
     }
 
 
-   /* @RequestMapping(value = "insertBar", method = RequestMethod.POST)
+  /* @RequestMapping(value = "insertBar", method = RequestMethod.POST)
     public ResponseEntity<Bar> create(@RequestBody Bar bar) {
 // Creamos un nuevo producto a partir de los datos una vez insertado
         Bar b = bd.save(bar);

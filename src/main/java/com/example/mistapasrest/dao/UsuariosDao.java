@@ -15,7 +15,7 @@ public interface UsuariosDao extends JpaRepository<Usuario, Integer> {
                                                     @Param("psw") String psw);*/
 
 
-    @Query("SELECT u.nickname,u.psw,u.email FROM Usuario u where u.nickname = :nick and u.psw=:psw")
-    Optional<Usuario> findLogin(@Param("nick") String nick, @Param("psw") String psw);
+   // @Query("SELECT u.nickname,u.psw,u.email FROM Usuario u where u.nickname = :nick and u.psw=:psw")
+    Optional<Usuario> findByNicknameAndPsw (@Param("nick") String nick, @Param("psw") String psw);
 
 }
