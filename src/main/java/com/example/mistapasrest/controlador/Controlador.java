@@ -1,6 +1,8 @@
 package com.example.mistapasrest.controlador;
 
+import com.example.mistapasrest.dao.BaresDao;
 import com.example.mistapasrest.dao.UsuariosDao;
+import com.example.mistapasrest.modelos.Bar;
 import com.example.mistapasrest.modelos.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,22 +17,25 @@ public class Controlador {
 
     @Autowired
     private UsuariosDao ud;
+   // private BaresDao bd;
 
     @GetMapping
-    @RequestMapping(value="hola",method= RequestMethod.GET)
-    public String hola(){return "hola chicos, vuestro lider avanza";}
+    @RequestMapping(value = "hola", method = RequestMethod.GET)
+    public String hola() {
+        return "hola chicos, vuestro lider avanza";
+    }
 
 
+    @RequestMapping(value = "testusuarios", method = RequestMethod.GET)
+    public ResponseEntity<Usuario> getUsuario() {
+        Usuario u = new Usuario();
 
-    @RequestMapping(value="testusuarios",method= RequestMethod.GET)
-    public ResponseEntity<Usuario> getUsuario(){
-       Usuario u= new Usuario ();
-
-       return ResponseEntity.ok(u);
+        return ResponseEntity.ok(u);
     }
 
     /**
      * Listamos todos los usuarios
+     *
      * @return List<Usuario></Usuario>
      */
     @RequestMapping(value = "usuarios", method = RequestMethod.GET)
@@ -42,12 +47,17 @@ public class Controlador {
         return ResponseEntity.ok(l);
     }
 
-
+    /**
+     * Metodo para realizar el login
+     * @param nick
+     * @param psw
+     * @return
+     */
     @RequestMapping(value = "login/{nick}/{psw}", method = RequestMethod.GET)
     public ResponseEntity<Usuario> findByNicknamePsw(@PathVariable("nick") String nick, @PathVariable("psw") String psw) {
         // Buscamos el producto por id
 
-        Optional<Usuario> op = ud.findLogin(nick,psw);
+        Optional<Usuario> op = ud.findLogin(nick, psw);
         // Devolvemos el producto si existe.
         if (op.isPresent()) {
             return ResponseEntity.ok(op.get());
@@ -57,17 +67,43 @@ public class Controlador {
 
     }
 
-    @RequestMapping(value = "login/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Usuario> findbyId(@PathVariable("id") Integer id) {
+    /**
+     * Metodo para insertar un usuario nuevo
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "registro", method = RequestMethod.POST)
+    public ResponseEntity<Usuario> create(@RequestBody Usuario user) {
+// Creamos un nuevo producto a partir de los datos una vez insertado
+        Usuario p = ud.save(user);
+
+//devolvemos el nuevo producto
+        return ResponseEntity.ok(p);
+    }
+
+    @RequestMapping(value = "borrar/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Usuario> delete(@PathVariable("id") Integer id) {
         // Buscamos el producto por id
-
         Optional<Usuario> op = ud.findById(id);
-        // Devolvemos el producto si existe.
+        // si existe lo borramos y devolvemos
         if (op.isPresent()) {
-            return ResponseEntity.ok(op.get());
+            // Le pasamos los datos
+            Usuario p = op.get();
+            ud.deleteById(id);
+            return ResponseEntity.ok(p);
         } else {
             return ResponseEntity.noContent().build();
         }
     }
+
+
+   /* @RequestMapping(value = "insertBar", method = RequestMethod.POST)
+    public ResponseEntity<Bar> create(@RequestBody Bar bar) {
+// Creamos un nuevo producto a partir de los datos una vez insertado
+        Bar b = bd.save(bar);
+
+//devolvemos el nuevo producto
+        return ResponseEntity.ok(b);
+    }*/
 
 }

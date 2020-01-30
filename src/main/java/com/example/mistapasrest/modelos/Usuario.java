@@ -22,17 +22,45 @@ public class Usuario {
     @Column(name = "psw", nullable = false, length = 50)
     private String psw;
 
+    @Column(name="token", nullable=false, length = 50)
+    private String token;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nickname, String nombre, String email, String psw) {
+    public Usuario(int id, String nickname, String nombre, String email, String psw, String token) {
         this.id = id;
         this.nickname = nickname;
         this.nombre = nombre;
         this.email = email;
         this.psw = psw;
+        this.token=token;
 
+    }
+
+    /*public Usuario( String nickname, String nombre, String email, String psw, String token) {
+
+        this.nickname = nickname;
+        this.nombre = nombre;
+        this.email = email;
+        this.psw = psw;
+        this.token=token;
+
+    }
+
+    public Usuario( String nickname) {
+
+        this.nickname = nickname;
+
+
+    }*/
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getNickname() {
