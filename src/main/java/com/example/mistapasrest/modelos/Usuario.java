@@ -2,30 +2,65 @@ package com.example.mistapasrest.modelos;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table (name="usuarios")
 public class Usuario {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column(name = "nickname", nullable = false, length = 50, unique = true)
     private String nickname;
+    @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
+    @Column(name = "email", nullable = false, length = 50)
     private String email;
+    @Column(name = "psw", nullable = false, length = 50)
     private String psw;
-    private int id_bar;
+
+    @Column(name="token", nullable=false, length = 50)
+    private String token;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nickname, String nombre, String email, String psw, int id_bar) {
+    public Usuario(int id, String nickname, String nombre, String email, String psw, String token) {
         this.id = id;
         this.nickname = nickname;
         this.nombre = nombre;
         this.email = email;
         this.psw = psw;
-        this.id_bar = id_bar;
+        this.token=token;
+
+    }
+
+    /*public Usuario( String nickname, String nombre, String email, String psw, String token) {
+
+        this.nickname = nickname;
+        this.nombre = nombre;
+        this.email = email;
+        this.psw = psw;
+        this.token=token;
+
+    }
+
+    public Usuario( String nickname) {
+
+        this.nickname = nickname;
+
+
+    }*/
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getNickname() {
@@ -44,13 +79,6 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public int getId_bar() {
-        return id_bar;
-    }
-
-    public void setId_bar(int id_bar) {
-        this.id_bar = id_bar;
-    }
 
     public int getId() {
         return id;
@@ -78,6 +106,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{}";
+        return String.format(
+                "Usuario[id=%d,nickname='%s', nombre='%s',email='%s',psw='%s',",id,nickname,nombre,email,psw);
     }
 }
