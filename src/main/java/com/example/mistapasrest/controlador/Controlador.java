@@ -95,7 +95,7 @@ public class Controlador {
             return ResponseEntity.noContent().build();
         }
     }
-
+//
 
    /* @RequestMapping(value = "insertBar", method = RequestMethod.POST)
     public ResponseEntity<Bar> create(@RequestBody Bar bar) {
