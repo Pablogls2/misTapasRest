@@ -17,8 +17,8 @@ public class Controlador {
 
     @Autowired
     private UsuariosDao ud;
-    /*@Autowired
-    private BaresDao bd;*/
+    @Autowired
+    private BaresDao bd;
 
     @GetMapping
     @RequestMapping(value = "hola", method = RequestMethod.GET)
@@ -50,6 +50,7 @@ public class Controlador {
 
     /**
      * Metodo para realizar el login
+     *
      * @param nick
      * @param psw
      * @return
@@ -70,6 +71,7 @@ public class Controlador {
 
     /**
      * Metodo para insertar un usuario nuevo
+     *
      * @param user
      * @return
      */
@@ -97,14 +99,65 @@ public class Controlador {
         }
     }
 
+    @RequestMapping(value = "updateTok/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Usuario> update(@PathVariable("id") Integer id, @RequestBody Usuario u) {
+// Buscamos el producto por id
+        Optional<Usuario> op = ud.findById(id);
+// Devolvemos el producto si existe.
+        if (op.isPresent()) {
+// Le pasamos los datos
+            Usuario p = op.get();
+            p.setToken(u.getNombre());
+            ud.save(p);
+            return ResponseEntity.ok(p);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
 
-  /* @RequestMapping(value = "insertBar", method = RequestMethod.POST)
+
+    /**
+     * Metodo para insertar un nuevo bar
+     *
+     * @param bar
+     * @return
+     */
+    @RequestMapping(value = "insertBar", method = RequestMethod.POST)
     public ResponseEntity<Bar> create(@RequestBody Bar bar) {
 // Creamos un nuevo producto a partir de los datos una vez insertado
         Bar b = bd.save(bar);
 
 //devolvemos el nuevo producto
         return ResponseEntity.ok(b);
-    }*/
+    }
+
+
+    @RequestMapping(value = "listBar/{id_bar}/{nombre}", method = RequestMethod.GET)
+    public ResponseEntity<Bar> findById_barAndNombre(@PathVariable("id_bar") int id_bar, @PathVariable("nombre") String nombre) {
+        // Buscamos el producto por id
+
+        Optional<Bar> op = bd.findByIdAndNombre(id_bar, nombre);
+        // Devolvemos el producto si existe.
+        if (op.isPresent()) {
+            return ResponseEntity.ok(op.get());
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+
+    }
+
+    @RequestMapping(value = "listBar/{id_bar}", method = RequestMethod.GET)
+    public ResponseEntity<Bar> findById(@PathVariable("id_bar") int id_bar) {
+        // Buscamos el producto por id
+
+        Optional<Bar> op = bd.findById(id_bar);
+        // Devolvemos el producto si existe.
+        if (op.isPresent()) {
+            return ResponseEntity.ok(op.get());
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+
+    }
 
 }

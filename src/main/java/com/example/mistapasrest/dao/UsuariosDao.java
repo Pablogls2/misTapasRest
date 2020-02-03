@@ -18,4 +18,6 @@ public interface UsuariosDao extends JpaRepository<Usuario, Integer> {
    // @Query("SELECT u.nickname,u.psw,u.email FROM Usuario u where u.nickname = :nick and u.psw=:psw")
     Optional<Usuario> findByNicknameAndPsw (@Param("nick") String nick, @Param("psw") String psw);
 
+
+
 }

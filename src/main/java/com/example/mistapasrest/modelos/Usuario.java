@@ -22,7 +22,7 @@ public class Usuario {
     @Column(name = "psw", nullable = false, length = 50)
     private String psw;
 
-    @Column(name="token", nullable=false, length = 50)
+    @Column(name="token", nullable=true, length = 50, unique=true)
     private String token;
 
     public Usuario() {

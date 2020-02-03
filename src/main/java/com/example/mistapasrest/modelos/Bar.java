@@ -7,12 +7,14 @@ import javax.persistence.*;
 public class Bar {
 
     @Id
-    @Column(name = "id_bar")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
+    @Column(name ="tapas",nullable = true,length = 500)
+    private String tapas;
     @Column(name = "latitud", nullable = false, length = 50)
     private Double latitud;
     @Column(name = "longitud", nullable = false, length = 50)
@@ -24,12 +26,15 @@ public class Bar {
 
     }
 
-    public Bar(String nombre, Double latitud, Double longitud, int estrellas) {
+    public Bar(int id_bar,String nombre, Double latitud, Double longitud, int estrellas,String tapas) {
+        this.id=id_bar;
         this.nombre = nombre;
         this.latitud = latitud;
         this.longitud = longitud;
         this.estrellas = estrellas;
+        this.tapas = tapas;
     }
+
 
     public int getId() {
         return id;
@@ -38,6 +43,16 @@ public class Bar {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getTapas() {
+        return tapas;
+    }
+
+    public void setTapas(String tapas) {
+        this.tapas = tapas;
+    }
+
+    
 
     public String getNombre() {
         return nombre;
