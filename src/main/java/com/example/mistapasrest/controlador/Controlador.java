@@ -132,21 +132,17 @@ public class Controlador {
     }
 
 
-    @RequestMapping(value = "listBar/{id_bar}/{nombre}", method = RequestMethod.GET)
-    public ResponseEntity<Bar> findById_barAndNombre(@PathVariable("id_bar") int id_bar, @PathVariable("nombre") String nombre) {
+    @RequestMapping(value = "listBar/{idUsuario}/{nombre}", method = RequestMethod.GET)
+    public ResponseEntity<List<Bar>> findByIdUsuarioAndNombreStartsWith(@PathVariable("idUsuario") int idUsuario, @PathVariable("nombre") String nombre) {
         // Buscamos el producto por id
 
-        Optional<Bar> op = bd.findByIdAndNombre(id_bar, nombre);
+        List<Bar> lista = bd.findByIdUsuarioAndNombreStartsWith(idUsuario, nombre);
         // Devolvemos el producto si existe.
-        if (op.isPresent()) {
-            return ResponseEntity.ok(op.get());
-        } else {
-            return ResponseEntity.noContent().build();
-        }
+        return ResponseEntity.ok(lista);
 
     }
 
-    @RequestMapping(value = "listBar/{id_bar}", method = RequestMethod.GET)
+    /*@RequestMapping(value = "listBar/{id_bar}", method = RequestMethod.GET)
     public ResponseEntity<Bar> findById(@PathVariable("id_bar") int id_bar) {
         // Buscamos el producto por id
 
@@ -157,6 +153,19 @@ public class Controlador {
         } else {
             return ResponseEntity.noContent().build();
         }
+
+    }*/
+
+
+    
+
+   @RequestMapping(value = "listBar/{idUsuario}", method = RequestMethod.GET)
+    public ResponseEntity<List<Bar>> findAllByIdUsuario(@PathVariable("idUsuario") int id_usuario) {
+        // Buscamos el producto por id
+
+       List<Bar> lista = bd.findAllByIdUsuario(id_usuario);
+        // Devolvemos el producto si existe.
+       return ResponseEntity.ok(lista);
 
     }
 

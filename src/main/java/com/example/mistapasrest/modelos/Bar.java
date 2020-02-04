@@ -22,19 +22,42 @@ public class Bar {
     @Column(name = "estrellas", nullable = false, length = 1)
     private int estrellas;
 
+    @Column(name = "idUsuario", nullable = false, length = 3)
+    private int idUsuario;
+
+    @Lob
+    @Column(name = "imagen")
+    private String imagen;
     public Bar (){
 
     }
 
-    public Bar(int id_bar,String nombre, Double latitud, Double longitud, int estrellas,String tapas) {
+    public Bar(int id_bar,String nombre, Double latitud, Double longitud, int estrellas,String tapas, String imagen, int id_usuario) {
         this.id=id_bar;
         this.nombre = nombre;
         this.latitud = latitud;
         this.longitud = longitud;
         this.estrellas = estrellas;
         this.tapas = tapas;
+        this.imagen=imagen;
+        this.idUsuario=id_usuario;
     }
 
+    public int getId_usuario() {
+        return idUsuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.idUsuario = id_usuario;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 
     public int getId() {
         return id;
@@ -52,7 +75,7 @@ public class Bar {
         this.tapas = tapas;
     }
 
-    
+
 
     public String getNombre() {
         return nombre;
