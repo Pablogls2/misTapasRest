@@ -20,6 +20,10 @@ public class Controlador {
     @Autowired
     private BaresDao bd;
 
+    /**
+     * Primer metodo de la clase que hicimos de prueba
+     * @return String con un mensaje de prueba
+     */
     @GetMapping
     @RequestMapping(value = "hola", method = RequestMethod.GET)
     public String hola() {
@@ -115,7 +119,7 @@ public class Controlador {
         }
     }
 
-    @RequestMapping(value = "updateTok/{id}", method = RequestMethod.PUT)
+   @RequestMapping(value = "updateTok/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Usuario> update(@PathVariable("id") Integer id, @RequestBody Usuario u) {
 // Buscamos el producto por id
         Optional<Usuario> op = ud.findById(id);
@@ -123,13 +127,14 @@ public class Controlador {
         if (op.isPresent()) {
 // Le pasamos los datos
             Usuario p = op.get();
-            p.setToken(u.getNombre());
+            p.setToken(u.getToken());
             ud.save(p);
             return ResponseEntity.ok(p);
         } else {
             return ResponseEntity.noContent().build();
         }
     }
+
 
 
     /**

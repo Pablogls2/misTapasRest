@@ -38,22 +38,7 @@ public class Usuario {
 
     }
 
-    /*public Usuario( String nickname, String nombre, String email, String psw, String token) {
 
-        this.nickname = nickname;
-        this.nombre = nombre;
-        this.email = email;
-        this.psw = psw;
-        this.token=token;
-
-    }
-
-    public Usuario( String nickname) {
-
-        this.nickname = nickname;
-
-
-    }*/
 
     public String getToken() {
         return token;

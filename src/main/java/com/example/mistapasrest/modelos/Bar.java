@@ -32,7 +32,7 @@ public class Bar {
 
     }
 
-    public Bar(int id_bar,String nombre, Double latitud, Double longitud, int estrellas,String tapas, String imagen, int id_usuario) {
+    public Bar(int id_bar,String nombre, Double latitud, Double longitud, int estrellas,String tapas, String imagen, int idUsuario) {
         this.id=id_bar;
         this.nombre = nombre;
         this.latitud = latitud;
@@ -40,16 +40,28 @@ public class Bar {
         this.estrellas = estrellas;
         this.tapas = tapas;
         this.imagen=imagen;
-        this.idUsuario=id_usuario;
+        this.idUsuario=idUsuario;
     }
 
-    public int getId_usuario() {
+    public Bar(String nombre, Double latitud, Double longitud, int estrellas,String tapas, String imagen, int idUsuario) {
+
+        this.nombre = nombre;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.estrellas = estrellas;
+        this.tapas = tapas;
+        this.imagen=imagen;
+        this.idUsuario=idUsuario;
+    }
+
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.idUsuario = id_usuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
+
 
     public String getImagen() {
         return imagen;
