@@ -10,13 +10,11 @@ import java.util.UUID;
 
 public interface UsuariosDao extends JpaRepository<Usuario, Integer> {
 
-   /* @Query("SELECT t FROM Usuario t where t.nickname = :nickname AND t.psw = :nickname")
-    public Optional<Usuario> findbyNickPsw(@Param("nickname") String nick,
-                                                    @Param("psw") String psw);*/
-
-
-   // @Query("SELECT u.nickname,u.psw,u.email FROM Usuario u where u.nickname = :nick and u.psw=:psw")
+   //para comprobar el login
     Optional<Usuario> findByNicknameAndPsw (@Param("nick") String nick, @Param("psw") String psw);
+
+    //para comprobar que al registrar no se repita el nickname
+    Optional<Usuario> findByNickname (@Param("nick") String nick);
 
 
 

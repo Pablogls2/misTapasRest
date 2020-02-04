@@ -69,6 +69,22 @@ public class Controlador {
 
     }
 
+    @RequestMapping(value = "comproRegistro/{nick}", method = RequestMethod.GET)
+    public ResponseEntity<Usuario> findByNickname(@PathVariable("nick") String nick) {
+        // Buscamos el producto por id
+
+        Optional<Usuario> op = ud.findByNickname(nick);
+        // Devolvemos el producto si existe.
+        if (op.isPresent()) {
+            return ResponseEntity.ok(op.get());
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+
+    }
+
+
+
     /**
      * Metodo para insertar un usuario nuevo
      *
@@ -157,7 +173,7 @@ public class Controlador {
     }*/
 
 
-    
+
 
    @RequestMapping(value = "listBar/{idUsuario}", method = RequestMethod.GET)
     public ResponseEntity<List<Bar>> findAllByIdUsuario(@PathVariable("idUsuario") int id_usuario) {
