@@ -52,6 +52,10 @@ public class Controlador {
         return ResponseEntity.ok(l);
     }
 
+
+
+
+
     /**
      * Metodo para realizar el login
      *
@@ -163,20 +167,6 @@ public class Controlador {
 
     }
 
-    /*@RequestMapping(value = "listBar/{id_bar}", method = RequestMethod.GET)
-    public ResponseEntity<Bar> findById(@PathVariable("id_bar") int id_bar) {
-        // Buscamos el producto por id
-
-        Optional<Bar> op = bd.findById(id_bar);
-        // Devolvemos el producto si existe.
-        if (op.isPresent()) {
-            return ResponseEntity.ok(op.get());
-        } else {
-            return ResponseEntity.noContent().build();
-        }
-
-    }*/
-
 
 
 
@@ -190,4 +180,58 @@ public class Controlador {
 
     }
 
+    @RequestMapping(value = "listBar/orderNomAsc", method = RequestMethod.GET)
+    public ResponseEntity<List<Bar>> findAllByOrderByNombreAsc() {
+        // Buscamos el producto por id
+
+        List<Bar> lista = bd.findAllByOrderByNombreAsc();
+        // Devolvemos el producto si existe.
+        return ResponseEntity.ok(lista);
+
+    }
+
+    @RequestMapping(value = "listBar/orderNomDesc", method = RequestMethod.GET)
+    public ResponseEntity<List<Bar>> findAllByOrderByNombreDesc() {
+        // Buscamos el producto por id
+
+        List<Bar> lista = bd.findAllByOrderByNombreDesc();
+        // Devolvemos el producto si existe.
+        return ResponseEntity.ok(lista);
+
+    }
+
+
+    @RequestMapping(value = "listBar/orderEstAsc", method = RequestMethod.GET)
+    public ResponseEntity<List<Bar>> findAllByOrderByEstrellasAsc() {
+        // Buscamos el producto por id
+
+        List<Bar> lista = bd.findAllByOrderByEstrellasAsc();
+        // Devolvemos el producto si existe.
+        return ResponseEntity.ok(lista);
+
+    }
+
+    @RequestMapping(value = "listBar/orderEstDesc", method = RequestMethod.GET)
+    public ResponseEntity<List<Bar>> findAllByOrderByEstrellasDesc() {
+        // Buscamos el producto por id
+
+        List<Bar> lista = bd.findAllByOrderByEstrellasDesc();
+        // Devolvemos el producto si existe.
+        return ResponseEntity.ok(lista);
+
+    }
+    @RequestMapping(value = "deleteBar/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Bar> deleteBar(@PathVariable("id") Integer id) {
+        // Buscamos el producto por id
+        Optional<Bar> op = bd.findById(id);
+        // si existe lo borramos y devolvemos
+        if (op.isPresent()) {
+            // Le pasamos los datos
+            Bar p = op.get();
+            bd.deleteById(id);
+            return ResponseEntity.ok(p);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
 }
