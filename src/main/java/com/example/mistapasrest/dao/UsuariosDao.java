@@ -15,7 +15,7 @@ public interface UsuariosDao extends JpaRepository<Usuario, Integer> {
 
     //para comprobar que al registrar no se repita el nickname
     Optional<Usuario> findByNickname (@Param("nick") String nick);
-
-
+    //para comprobar el token guardado en el dispositivo y el de la base de datos
+    Optional<Usuario> findByToken(@Param( "token") String token);
 
 }

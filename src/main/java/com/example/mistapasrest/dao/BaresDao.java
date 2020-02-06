@@ -13,15 +13,11 @@ import java.util.Optional;
 public interface BaresDao extends JpaRepository<Bar, Integer> {
 
 
-    List<Bar> findByIdUsuarioAndNombreStartsWith (@Param("idUsuario") int idUsuario, @Param("nombre") String nombre);
 
+    //buscamos todos los bares por el id de el usuario
     List<Bar> findAllByIdUsuario(@Param("idUsuario") int idUsuario);
 
-     List<Bar> findAllByOrderByNombreAsc();
-    List<Bar> findAllByOrderByNombreDesc();
 
-    List<Bar> findAllByOrderByEstrellasDesc();
-    List<Bar> findAllByOrderByEstrellasAsc();
 
 
 
